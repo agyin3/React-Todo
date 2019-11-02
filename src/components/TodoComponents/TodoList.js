@@ -7,7 +7,7 @@ import Todo from './Todo';
 const TodoList = props => {
 
     return(
-        <div>
+        <div className='todo-wrapper'>
             {(props.todos.length > 0) && props.todos.map(todo => {
                 return(<Todo complete={props.completeTask} key={todo.id} todo={todo} />);
             })}

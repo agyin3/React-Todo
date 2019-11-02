@@ -1,6 +1,7 @@
 import React from 'react';
 import TodoList from './components/TodoComponents/TodoList';
 import TodoForm from './components/TodoComponents/TodoForm';
+import './components/TodoComponents/Todo.css'
 
 const data = [
   {
@@ -18,7 +19,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      todos: data,
+      todos: [],
       taskName: ''
     };
   }
@@ -49,17 +50,17 @@ class App extends React.Component {
     })
   }
 
-  addTask = taskName => {
+  addTask = task => {
     this.setState({
       todos: [
         ...this.state.todos,
         {
           id: Date.now(),
-          task: taskName,
+          task: task,
           completed: false
         }
       ]
-    })
+    });
   }
 
   completeTask = taskId => {
@@ -77,13 +78,27 @@ class App extends React.Component {
     })
   }
 
+  searchTask = e => {
+    this.setState({
+      todos: this.state.todos.filter(task => {
+        return task.task.toUpperCase().includes(e.target.value.toUpperCase())
+      })
+    })
+  }
 
 
   render() {
     return (
-      <div>
-        <h2>Welcome to your Todo App!</h2>
-        <TodoForm addTask={this.addTask} handleChange={this.handleChange} handleSumbit={this.handleSumbit} handleComplete={this.handleComplete}/>
+      <div className='main-wrapper'>
+        <h2>TO-DO List</h2>
+        <input type='text' placeholder='Search...' name='search' onChange={this.searchTask}/>
+        <TodoForm
+          addTask={this.addTask} 
+          handleChange={this.handleChange} 
+          handleSumbit={this.handleSumbit} 
+          handleComplete={this.handleComplete} 
+          value={this.state.taskName}
+         />
         <TodoList completeTask={this.completeTask} todos={this.state.todos} />
       </div>
     );

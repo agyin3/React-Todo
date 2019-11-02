@@ -8,8 +8,8 @@ const Todo = props => {
 
     return(
         <div>
-            <div onClick={handleClick}>
-                <p>{props.todo.task}</p>
+            <div className='todo' onClick={handleClick}>
+                <p className={'task ' + (props.todo.completed ? 'completed' : '')}>{props.todo.task}</p>
             </div>
         </div>
     )
