@@ -91,7 +91,15 @@ class App extends React.Component {
     return (
       <div className='main-wrapper'>
         <h2>TO-DO List</h2>
-        <input type='text' placeholder='Search...' name='search' onChange={this.searchTask}/>
+
+        <input
+          className='search' 
+          type='text' 
+          placeholder='Search...' 
+          name='search' 
+          onChange={this.searchTask}
+         />
+
         <TodoForm
           addTask={this.addTask} 
           handleChange={this.handleChange} 
